@@ -49,11 +49,9 @@ echo "answer-4: $answer_4" >> answer.yml
 
 genesbed=$HOME/Desktop/data-sets5/bed/genes.hg19.bed  
 answer_5=$(bedtools complement -i $genesbed -g $GENOME \
-    |awk '{OFS="\t"}{print $3-$2, $1, $2, $3}' \
+    |awk '{OFS="\t"}($1 == "chr22"){print $3-$2, $1, $2, $3}' \
     |sort -k1n \
     |tail -n1 \
     |awk '{print $2":"$3"-"$4}')
-
 echo "answer-5: $answer_5"
 echo "answer-5: $answer_5" >> answer.yml
-
